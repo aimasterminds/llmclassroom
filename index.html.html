@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Classroom • Premium Prompt Library &amp; AI Hub</title>
+  <meta name="description" content="Buy individual prompt packages or get Pro membership for unlimited access. The professional hub for high-performance AI prompts, latest research, and community discussions.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+    
+    body { font-family: 'Inter', system_ui, sans-serif; }
+    .font-display { font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 600; }
+
+    .hero-bg { background: radial-gradient(at center, #1a0033 0%, #0a0a0a 70%); }
+    .section-header { font-size: 2.5rem; line-height: 1.1; font-weight: 700; letter-spacing: -0.025em; }
+    
+    .prompt-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .prompt-card:hover { transform: translateY(-6px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.1); }
+
+    .category-pill { transition: all 0.2s ease; }
+    .category-pill.active { background-color: #a855f7; color: white; border-color: #a855f7; }
+
+    .prompt-tag { font-size: 0.75rem; padding: 1px 10px; border-radius: 9999px; background-color: #27251f; }
+    .news-card { transition: transform 0.2s ease; }
+    .news-card:hover { transform: translateY(-3px); }
+    
+    .gradient-text { background: linear-gradient(90deg, #c084fc, #67e8f9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .stat-value { font-variant-numeric: tabular-nums; }
+
+    .discussion-card { transition: all 0.2s ease; }
+    .discussion-card:hover { border-color: #a855f7; }
+  </style>
+</head>
+<body class="bg-zinc-950 text-white">
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 bg-zinc-950/95 backdrop-blur-lg border-b border-white/10">
+    <div class="max-w-screen-2xl mx-auto px-8">
+      <div class="flex items-center justify-between py-5">
+        <div class="flex items-center gap-x-3">
+          <div class="w-10 h-10 bg-gradient-to-br from-purple-600 to-cyan-400 rounded-2xl flex items-center justify-center">
+            <span class="text-3xl">🧠</span>
+          </div>
+          <span class="font-display text-3xl font-semibold tracking-tighter">LLM Classroom</span>
+        </div>
+
+        <div class="hidden md:flex items-center gap-x-8 text-sm">
+          <a href="#prompts" class="hover:text-purple-400 transition">Prompts</a>
+          <a href="#insights" class="hover:text-purple-400 transition">Insights</a>
+          <a href="#community" class="hover:text-purple-400 transition">Community</a>
+          <a href="#courses" class="hover:text-purple-400 transition">Courses</a>
+        </div>
+
+        <div class="flex items-center gap-x-3">
+          <button onclick="showPricingModal()" 
+                  class="hidden sm:block px-5 py-2 text-sm font-medium border border-white/20 hover:bg-white/5 rounded-2xl transition">
+            Pricing
+          </button>
+          <button onclick="showLoginModal()" 
+                  class="px-5 py-2 text-sm font-medium hover:bg-white/5 rounded-2xl transition">
+            Log in
+          </button>
+          <button onclick="showPricingModal()" 
+                  class="bg-white text-black hover:bg-gray-100 px-6 py-2.5 rounded-2xl text-sm font-semibold transition">
+            Get Pro
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-bg pt-16 pb-20">
+    <div class="max-w-screen-2xl mx-auto px-8">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-3xl bg-white/5 border border-white/10 mb-6 text-sm">
+          <span class="text-emerald-400">●</span>
+          <span>Updated daily • 152 prompt packages • 47k+ downloads</span>
+        </div>
+
+        <h1 class="text-7xl md:text-8xl font-display font-bold tracking-tighter leading-none">
+          Premium prompts.<br>
+          <span class="gradient-text">Real results.</span>
+        </h1>
+        <p class="mt-6 max-w-lg text-xl text-gray-300">
+          Buy individual high-performance prompt packages or unlock everything with Pro. 
+          Plus the latest research, publications, and a thriving builder community.
+        </p>
+
+        <div class="flex flex-wrap gap-4 mt-8">
+          <button onclick="document.getElementById('prompts').scrollIntoView({ behavior: 'smooth' })" 
+                  class="bg-white hover:bg-gray-100 px-8 py-4 rounded-3xl text-black font-semibold flex items-center gap-3 text-lg transition">
+            Browse Prompt Library
+          </button>
+          <button onclick="showPricingModal()" 
+                  class="border border-white/30 hover:bg-white/5 px-8 py-4 rounded-3xl font-semibold flex items-center gap-3 text-lg transition">
+            See Pricing
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="border-b border-white/10 bg-zinc-900">
+    <div class="max-w-screen-2xl mx-auto px-8 py-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
+      <div><div class="text-4xl font-bold">152</div><div class="text-sm text-gray-400">Prompt Packages</div></div>
+      <div><div class="text-4xl font-bold">47,892</div><div class="text-sm text-gray-400">Prompts Downloaded</div></div>
+      <div><div class="text-4xl font-bold">4.94</div><div class="text-sm text-gray-400">Average Rating</div></div>
+      <div><div class="text-4xl font-bold">12.4k</div><div class="text-sm text-gray-400">Active Members</div></div>
+    </div>
+  </div>
+
+  <!-- PROMPT LIBRARY -->
+  <section id="prompts" class="max-w-screen-2xl mx-auto px-8 pt-16 pb-12">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-y-4 mb-8">
+      <div>
+        <h2 class="section-header tracking-tighter">Prompt Library</h2>
+        <p class="text-gray-400 mt-2">Buy individually or unlock unlimited access with Pro</p>
+      </div>
+      <div class="relative w-full md:w-80">
+        <input type="text" id="search-input" placeholder="Search prompts..." 
+               class="w-full bg-zinc-900 border border-white/10 focus:border-purple-500 pl-11 py-3 rounded-2xl text-sm">
+        <i class="fas fa-search absolute left-4 top-4 text-gray-500"></i>
+      </div>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="flex flex-wrap gap-2 mb-8" id="category-filters">
+      <button onclick="filterByCategory('all')" class="category-pill active px-5 py-2 text-sm rounded-2xl border border-white/10 bg-purple-600 text-white" data-category="all">All</button>
+      <button onclick="filterByCategory('sales')" class="category-pill px-5 py-2 text-sm rounded-2xl border border-white/10 hover:bg-white/5" data-category="sales">Sales</button>
+      <button onclick="filterByCategory('content')" class="category-pill px-5 py-2 text-sm rounded-2xl border border-white/10 hover:bg-white/5" data-category="content">Content</button>
+      <button onclick="filterByCategory('research')" class="category-pill px-5 py-2 text-sm rounded-2xl border border-white/10 hover:bg-white/5" data-category="research">Research</button>
+      <button onclick="filterByCategory('marketing')" class="category-pill px-5 py-2 text-sm rounded-2xl border border-white/10 hover:bg-white/5" data-category="marketing">Marketing</button>
+      <button onclick="filterByCategory('productivity')" class="category-pill px-5 py-2 text-sm rounded-2xl border border-white/10 hover:bg-white/5" data-category="productivity">Productivity</button>
+      <button onclick="filterByCategory('coding')" class="category-pill px-5 py-2 text-sm rounded-2xl border border-white/10 hover:bg-white/5" data-category="coding">Coding</button>
+      <button onclick="filterByCategory('business')" class="category-pill px-5 py-2 text-sm rounded-2xl border border-white/10 hover:bg-white/5" data-category="business">Business</button>
+    </div>
+
+    <div id="prompt-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+  </section>
+
+  <!-- INSIGHTS & PUBLICATIONS -->
+  <section id="insights" class="bg-zinc-900 border-y border-white/10 py-16">
+    <div class="max-w-screen-2xl mx-auto px-8">
+      <div class="flex items-end justify-between mb-8">
+        <div>
+          <h2 class="section-header tracking-tighter">Insights &amp; Publications</h2>
+          <p class="text-gray-400">Latest research, benchmarks, papers, and industry analysis</p>
+        </div>
+        <a href="#" class="text-sm text-purple-400 hover:text-purple-300 hidden md:flex items-center gap-2">View all publications <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex gap-2 mb-6 border-b border-white/10">
+        <button onclick="filterInsights('all')" class="insight-tab active px-5 py-2 text-sm font-medium border-b-2 border-purple-500" data-tab="all">All</button>
+        <button onclick="filterInsights('news')" class="insight-tab px-5 py-2 text-sm font-medium text-gray-400 hover:text-white" data-tab="news">News</button>
+        <button onclick="filterInsights('paper')" class="insight-tab px-5 py-2 text-sm font-medium text-gray-400 hover:text-white" data-tab="paper">Research Papers</button>
+        <button onclick="filterInsights('report')" class="insight-tab px-5 py-2 text-sm font-medium text-gray-400 hover:text-white" data-tab="report">Reports &amp; Benchmarks</button>
+      </div>
+
+      <div id="insights-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY HUB -->
+  <section id="community" class="max-w-screen-2xl mx-auto px-8 py-16">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-y-4 mb-8">
+      <div>
+        <h2 class="section-header tracking-tighter">Community Hub</h2>
+        <p class="text-gray-400">Discuss prompts, share wins, and connect with other builders</p>
+      </div>
+      <button onclick="showNewDiscussionModal()" 
+              class="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-2xl text-sm font-semibold flex items-center gap-2 w-fit">
+        <i class="fas fa-plus"></i> Start New Discussion
+      </button>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6" id="community-grid">
+      <!-- Populated by JS -->
+    </div>
+
+    <div class="text-center mt-8">
+      <button onclick="showLoginModal()" class="text-purple-400 hover:text-purple-300 text-sm font-medium">
+        Join the community to participate →
+      </button>
+    </div>
+  </section>
+
+  <!-- COURSES TEASER -->
+  <section id="courses" class="bg-zinc-900 border-y border-white/10 py-16">
+    <div class="max-w-screen-2xl mx-auto px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="uppercase text-xs tracking-[2px] text-purple-400 mb-3">DEEPER LEARNING</div>
+          <h2 class="text-5xl font-bold tracking-tighter">Master prompt engineering<br>with structured courses</h2>
+          <p class="mt-4 text-gray-300 max-w-md">Go beyond individual prompts. Learn the systems and frameworks used by top practitioners.</p>
+          <a href="https://payhip.com/LLMCLASSROOM" target="_blank"
+             class="inline-block mt-6 bg-white text-black px-8 py-3.5 rounded-2xl font-semibold">Browse Courses</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="bg-zinc-950 border border-white/10 p-6 rounded-3xl">
+            <div class="font-semibold">Prompt Engineering Mastery</div>
+            <div class="text-sm text-gray-400 mt-1">Advanced techniques &amp; frameworks</div>
+            <div class="mt-4 text-2xl font-bold">$49 <span class="text-xs font-normal text-gray-500">one-time</span></div>
+          </div>
+          <div class="bg-zinc-950 border border-white/10 p-6 rounded-3xl">
+            <div class="font-semibold">Building AI Agents 2026</div>
+            <div class="text-sm text-gray-400 mt-1">LangGraph, CrewAI, production systems</div>
+            <div class="mt-4 text-2xl font-bold">$89 <span class="text-xs font-normal text-gray-500">one-time</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="py-20 text-center">
+    <div class="max-w-2xl mx-auto px-6">
+      <h2 class="text-5xl font-bold tracking-tighter">Ready to build with the best prompts?</h2>
+      <p class="mt-4 text-xl text-gray-300">Join thousands of professionals using battle-tested prompt systems.</p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <button onclick="showPricingModal()" class="bg-white text-black px-10 py-4 rounded-3xl font-semibold text-lg">Get Pro Access</button>
+        <button onclick="document.getElementById('prompts').scrollIntoView({ behavior: 'smooth' })" 
+                class="border border-white/30 px-8 py-4 rounded-3xl font-semibold text-lg">Browse Individual Packs</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/10 py-12 bg-black text-sm text-gray-400">
+    <div class="max-w-screen-2xl mx-auto px-8 flex flex-col md:flex-row justify-between gap-y-4">
+      <div>© 2026 LLM Classroom • Professional prompt systems for builders</div>
+      <div class="flex gap-x-6">
+        <a href="#" class="hover:text-white">Twitter</a>
+        <a href="#" class="hover:text-white">Discord</a>
+        <a href="https://payhip.com/LLMCLASSROOM" class="hover:text-white">Courses</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Prompt Detail Modal -->
+  <div id="prompt-modal" onclick="if (event.target.id === 'prompt-modal') hidePromptModal()" class="hidden fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-6">
+    <div onclick="event.stopImmediatePropagation()" class="bg-zinc-900 border border-white/10 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-auto">
+      <div class="p-8" id="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- Pricing Modal -->
+  <div id="pricing-modal" onclick="if (event.target.id === 'pricing-modal') hidePricingModal()" class="hidden fixed inset-0 bg-black/80 z-[110] flex items-center justify-center p-6">
+    <div onclick="event.stopImmediatePropagation()" class="bg-zinc-900 border border-white/10 rounded-3xl w-full max-w-5xl">
+      <div class="p-8">
+        <div class="flex justify-between mb-8">
+          <div>
+            <h3 class="text-3xl font-bold">Choose how you want to access</h3>
+            <p class="text-gray-400">Buy individual packs or unlock everything with Pro</p>
+          </div>
+          <button onclick="hidePricingModal()" class="text-3xl text-gray-400 hover:text-white">&times;</button>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Individual Purchase -->
+          <div class="border border-white/10 rounded-3xl p-7">
+            <div class="font-semibold text-xl">Buy Individual Packs</div>
+            <p class="text-sm text-gray-400 mt-1">Perfect if you only need specific prompts</p>
+            <div class="mt-6 space-y-4 text-sm">
+              <div class="flex justify-between"><span>Cold Email Mastery</span> <span class="font-medium">$12</span></div>
+              <div class="flex justify-between"><span>Deep Research Agent Prompts</span> <span class="font-medium">$15</span></div>
+              <div class="flex justify-between"><span>Advanced Coding Assistant</span> <span class="font-medium">$14</span></div>
+              <div class="text-xs text-gray-500 pt-2">+ many more from $9–19 each</div>
+            </div>
+            <button onclick="hidePricingModal(); document.getElementById('prompts').scrollIntoView({ behavior: 'smooth' })" 
+                    class="mt-8 w-full border border-white/20 py-3 rounded-2xl hover:bg-white/5 transition">Browse &amp; Buy Individual Packs</button>
+          </div>
+
+          <!-- Pro -->
+          <div class="border border-purple-500 bg-zinc-950 rounded-3xl p-7 relative">
+            <div class="absolute -top-3 right-6 bg-purple-600 px-4 py-0.5 text-xs rounded-2xl font-medium">RECOMMENDED</div>
+            <div class="font-semibold text-xl">Pro Membership</div>
+            <div class="flex items-baseline gap-1 mt-1">
+              <span class="text-4xl font-bold">$19</span><span class="text-gray-400">/mo</span>
+            </div>
+            <div class="text-sm text-emerald-400 mt-1">or $149/year (save 35%)</div>
+
+            <ul class="mt-6 space-y-2.5 text-sm">
+              <li class="flex gap-3"><i class="fas fa-check text-emerald-400 mt-1 w-4"></i> Unlimited access to all 152 prompt packages</li>
+              <li class="flex gap-3"><i class="fas fa-check text-emerald-400 mt-1 w-4"></i> Download .md, .json, and .txt packs</li>
+              <li class="flex gap-3"><i class="fas fa-check text-emerald-400 mt-1 w-4"></i> Early access to new prompts</li>
+              <li class="flex gap-3"><i class="fas fa-check text-emerald-400 mt-1 w-4"></i> 30% off all courses</li>
+              <li class="flex gap-3"><i class="fas fa-check text-emerald-400 mt-1 w-4"></i> Private community access</li>
+              <li class="flex gap-3"><i class="fas fa-check text-emerald-400 mt-1 w-4"></i> Priority support</li>
+            </ul>
+
+            <button onclick="startProCheckout()" class="mt-8 w-full bg-purple-600 hover:bg-purple-700 py-3.5 rounded-2xl font-semibold">
+              Start 14-day free trial
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Discussion Modal -->
+  <div id="new-discussion-modal" onclick="if (event.target.id === 'new-discussion-modal') hideNewDiscussionModal()" class="hidden fixed inset-0 bg-black/80 z-[120] flex items-center justify-center p-6">
+    <div onclick="event.stopImmediatePropagation()" class="bg-zinc-900 border border-white/10 rounded-3xl w-full max-w-lg p-8">
+      <h3 class="text-2xl font-bold">Start a new discussion</h3>
+      <div class="mt-6 space-y-4">
+        <div>
+          <label class="text-sm text-gray-400">Title</label>
+          <input id="discussion-title" type="text" class="w-full mt-1.5 bg-zinc-800 border border-white/10 rounded-2xl px-4 py-3 text-sm" placeholder="What's your question or topic?">
+        </div>
+        <div>
+          <label class="text-sm text-gray-400">Category</label>
+          <select id="discussion-category" class="w-full mt-1.5 bg-zinc-800 border border-white/10 rounded-2xl px-4 py-3 text-sm">
+            <option>Prompt Engineering</option>
+            <option>Agent Building</option>
+            <option>AI News &amp; Research</option>
+            <option>Show &amp; Tell</option>
+            <option>General Discussion</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-sm text-gray-400">Your thoughts</label>
+          <textarea id="discussion-body" rows="4" class="w-full mt-1.5 bg-zinc-800 border border-white/10 rounded-2xl px-4 py-3 text-sm" placeholder="Share your thoughts or question..."></textarea>
+        </div>
+      </div>
+      <div class="flex gap-3 mt-6">
+        <button onclick="hideNewDiscussionModal()" class="flex-1 py-3 border border-white/20 rounded-2xl">Cancel</button>
+        <button onclick="postNewDiscussion()" class="flex-1 py-3 bg-purple-600 hover:bg-purple-700 rounded-2xl font-semibold">Post Discussion</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Prompt Packages Data
+    const promptPackages = [
+      { id: 1, title: "Cold Email Mastery Pack", category: "sales", description: "High-converting cold email sequences and frameworks.", tags: ["Cold Outreach", "B2B"], rating: 4.9, downloads: 12400, price: 12, free: false, useCase: "Outbound sales & recruiting" },
+      { id: 2, title: "YouTube Script Generator 2026", category: "content", description: "Create engaging YouTube scripts with strong hooks and structure.", tags: ["YouTube", "Scripting"], rating: 4.8, downloads: 9800, price: 15, free: false, useCase: "Educational & commentary channels" },
+      { id: 3, title: "Deep Research Agent Prompts", category: "research", description: "Turn LLMs into world-class researchers with multi-step chains.", tags: ["Research", "Analysis"], rating: 4.95, downloads: 15200, price: 15, free: false, useCase: "Market & competitive research" },
+      { id: 4, title: "LinkedIn Content System", category: "content", description: "High-engagement posts, carousels, and comment frameworks.", tags: ["LinkedIn", "Branding"], rating: 4.7, downloads: 8700, price: 9, free: true, useCase: "Personal branding & thought leadership" },
+      { id: 5, title: "Advanced Coding Assistant", category: "coding", description: "System prompts for writing, debugging, and refactoring code.", tags: ["Coding", "Development"], rating: 4.85, downloads: 11300, price: 14, free: false, useCase: "Software engineers" },
+      { id: 6, title: "Viral Twitter/X Thread Pack", category: "content", description: "Proven frameworks for high-reach threads.", tags: ["Twitter", "Viral"], rating: 4.6, downloads: 7600, price: 9, free: true, useCase: "Audience growth" },
+      { id: 7, title: "Customer Support AI Prompts", category: "business", description: "Empathetic, on-brand support responses.", tags: ["Support", "CX"], rating: 4.8, downloads: 6400, price: 11, free: false, useCase: "SaaS & e-commerce teams" },
+      { id: 8, title: "Market Research & Competitor Analysis", category: "research", description: "Deep frameworks for market and competitor intelligence.", tags: ["Strategy", "Research"], rating: 4.9, downloads: 9100, price: 13, free: false, useCase: "Founders & PMs" },
+      { id: 9, title: "High-Converting Sales Copy Pack", category: "marketing", description: "Landing pages, emails, and ad copy that converts.", tags: ["Copywriting", "Sales"], rating: 4.75, downloads: 10500, price: 16, free: false, useCase: "Growth & marketing teams" },
+      { id: 10, title: "Personal Productivity OS", category: "productivity", description: "Daily planning, decision-making, and second-brain systems.", tags: ["Productivity", "Life OS"], rating: 4.7, downloads: 13400, price: 9, free: true, useCase: "Knowledge workers" },
+      { id: 11, title: "Image Prompt Engineering Pack", category: "content", description: "Advanced prompts for Flux, Midjourney & GPT-4o image gen.", tags: ["Image Gen", "Design"], rating: 4.65, downloads: 5800, price: 12, free: false, useCase: "Designers & creators" },
+      { id: 12, title: "Business Strategy & Planning", category: "business", description: "SWOT, OKRs, business model, and strategic decision prompts.", tags: ["Strategy", "Leadership"], rating: 4.8, downloads: 7200, price: 14, free: false, useCase: "Entrepreneurs & executives" },
+      { id: 13, title: "Academic Research & Writing", category: "research", description: "Literature reviews, paper outlining, and academic tone.", tags: ["Academic", "Writing"], rating: 4.6, downloads: 4300, price: 10, free: true, useCase: "Students & researchers" },
+      { id: 14, title: "Hiring & Interview Prompts", category: "business", description: "Screening questions and candidate evaluation frameworks.", tags: ["Hiring", "HR"], rating: 4.55, downloads: 3900, price: 11, free: false, useCase: "Founders & hiring managers" },
+      { id: 15, title: "Newsletter Growth System", category: "content", description: "Subject lines, content ideas, and growth strategies.", tags: ["Newsletter", "Email"], rating: 4.7, downloads: 5100, price: 12, free: false, useCase: "Newsletter operators" }
+    ]
+
+    // Insights Data
+    const insightsData = [
+      { id: 1, type: "news", title: "OpenAI releases GPT-5.5 Instant as new ChatGPT default", date: "May 5, 2026", source: "OpenAI", summary: "Major improvements in speed and reasoning capabilities." },
+      { id: 2, type: "news", title: "xAI releases Grok 4.3 with major capability jumps", date: "May 7, 2026", source: "xAI", summary: "Strong gains in reasoning, tool use, and real-time knowledge." },
+      { id: 3, type: "paper", title: "State media control shapes LLM behaviour — Nature study", date: "May 13, 2026", source: "Nature", summary: "Governments can indirectly influence what LLMs say through training data." },
+      { id: 4, type: "report", title: "Frontier AI Impact on Cybersecurity — May 2026 Update", date: "May 13, 2026", source: "Palo Alto Networks", summary: "Latest findings on how frontier models are changing offensive security." },
+      { id: 5, type: "news", title: "Graphon AI raises $8.3M for pre-model intelligence layer", date: "May 14, 2026", source: "HPCwire", summary: "New startup building infrastructure to improve how models reason over connected data." },
+      { id: 6, type: "paper", title: "AI will soon be capable of telling convincing lies", date: "May 13, 2026", source: "The Register", summary: "Researchers warn about increasing deception capabilities in frontier models." },
+      { id: 7, type: "report", title: "LLM Market Forecast: $823 Billion by 2040", date: "May 13, 2026", source: "ResearchAndMarkets", summary: "Massive growth projected at 35.57% CAGR through 2040." },
+      { id: 8, type: "news", title: "Mira Murati’s Thinking Machines Lab unveils real-time interaction models", date: "May 11, 2026", source: "Tech", summary: "New models designed for seamless audio, video, and text collaboration." }
+    ]
+
+    // Community Discussions
+    let discussions = [
+      { id: 1, title: "Best prompt for multi-step research agents in 2026?", category: "Prompt Engineering", author: "sarah_research", replies: 24, likes: 47, time: "2h ago" },
+      { id: 2, title: "How are you using Grok 4.3 for agent workflows?", category: "Agent Building", author: "dev_alex", replies: 18, likes: 31, time: "5h ago" },
+      { id: 3, title: "Share your best cold email prompt that actually gets replies", category: "Show & Tell", author: "growth_mike", replies: 31, likes: 62, time: "Yesterday" },
+      { id: 4, title: "Thoughts on the new Nature paper about LLMs and state media?", category: "AI News & Research", author: "ethicist_lisa", replies: 12, likes: 19, time: "Yesterday" }
+    ]
+
+    // Render Prompt Grid
+    function renderPrompts(filtered = promptPackages) {
+      const grid = document.getElementById('prompt-grid')
+      grid.innerHTML = ''
+
+      filtered.forEach(p => {
+        const card = document.createElement('div')
+        card.className = `prompt-card bg-zinc-900 border border-white/10 rounded-3xl p-6 flex flex-col`
+        
+        card.innerHTML = `
+          <div class="flex justify-between items-start mb-3">
+            <div class="font-semibold text-lg pr-4">${p.title}</div>
+            ${p.free ? 
+              `<span class="text-[10px] px-3 py-1 bg-emerald-900 text-emerald-400 rounded-2xl text-center">FREE</span>` : 
+              `<span class="text-[10px] px-3 py-1 bg-purple-900 text-purple-400 rounded-2xl text-center">$${p.price}</span>`
+            }
+          </div>
+          
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            ${p.tags.map(t => `<span class="prompt-tag">${t}</span>`).join('')}
+          </div>
+
+          <p class="text-sm text-gray-400 flex-1">${p.description}</p>
+
+          <div class="mt-5 flex items-center justify-between text-sm">
+            <div class="flex items-center gap-3 text-xs">
+              <span class="text-yellow-400"><i class="fas fa-star"></i> ${p.rating}</span>
+              <span class="text-gray-500">${(p.downloads/1000).toFixed(1)}k</span>
+            </div>
+            <button onclick="showPromptDetail(${p.id})" class="text-purple-400 hover:text-purple-300 text-sm font-medium">View →</button>
+          </div>
+        `
+        grid.appendChild(card)
+      })
+    }
+
+    // Category + Search Filter
+    let currentCategory = 'all'
+    function filterByCategory(cat) {
+      currentCategory = cat
+      document.querySelectorAll('#category-filters button').forEach(b => b.classList.remove('active', 'bg-purple-600'))
+      const activeBtn = document.querySelector(`#category-filters button[data-category="${cat}"]`)
+      if (activeBtn) activeBtn.classList.add('active', 'bg-purple-600')
+      applyFilters()
+    }
+
+    function applyFilters() {
+      const term = document.getElementById('search-input').value.toLowerCase()
+      let filtered = promptPackages
+
+      if (currentCategory !== 'all') filtered = filtered.filter(p => p.category === currentCategory)
+      if (term) filtered = filtered.filter(p => 
+        p.title.toLowerCase().includes(term) || 
+        p.description.toLowerCase().includes(term) || 
+        p.tags.join(' ').toLowerCase().includes(term)
+      )
+      renderPrompts(filtered)
+    }
+
+    function initSearch() {
+      document.getElementById('search-input').addEventListener('input', applyFilters)
+    }
+
+    // Prompt Detail Modal with Buy Options
+    function showPromptDetail(id) {
+      const p = promptPackages.find(x => x.id === id)
+      const modal = document.getElementById('prompt-modal')
+      const content = document.getElementById('modal-content')
+
+      content.innerHTML = `
+        <div class="flex justify-between">
+          <div>
+            <span class="text-xs text-purple-400">${p.category.toUpperCase()}</span>
+            <h3 class="text-2xl font-bold mt-1">${p.title}</h3>
+          </div>
+          <button onclick="hidePromptModal()" class="text-3xl text-gray-400 hover:text-white">&times;</button>
+        </div>
+
+        <div class="flex gap-2 mt-4">${p.tags.map(t => `<span class="px-3 py-1 text-xs bg-zinc-800 rounded-2xl">${t}</span>`).join('')}</div>
+        
+        <p class="mt-5 text-gray-300">${p.description}</p>
+        <div class="mt-4 text-sm"><span class="text-gray-400">Best for:</span> ${p.useCase}</div>
+
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          ${p.free ? 
+            `<button onclick="downloadFreePrompt(${p.id}); hidePromptModal()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 py-3.5 rounded-2xl font-semibold">Download Free Pack</button>` :
+            `<button onclick="buyIndividualPrompt(${p.id}); hidePromptModal()" class="flex-1 bg-white text-black py-3.5 rounded-2xl font-semibold">Buy this pack — $${p.price}</button>`
+          }
+          <button onclick="showPricingModal(); hidePromptModal()" class="flex-1 border border-purple-500 text-purple-400 hover:bg-purple-950 py-3.5 rounded-2xl font-semibold">
+            Get with Pro (Unlimited)
+          </button>
+        </div>
+        <div class="text-center text-xs text-gray-500 mt-5">${p.downloads.toLocaleString()} downloads • ${p.rating} rating</div>
+      `
+      modal.classList.remove('hidden')
+      modal.classList.add('flex')
+    }
+
+    function hidePromptModal() {
+      const m = document.getElementById('prompt-modal')
+      m.classList.remove('flex')
+      m.classList.add('hidden')
+    }
+
+    function buyIndividualPrompt(id) {
+      const p = promptPackages.find(x => x.id === id)
+      alert(`Thank you! In production this would open checkout for "${p.title}" at $${p.price}.\n\nFor demo purposes, consider it purchased.`)
+    }
+
+    function downloadFreePrompt(id) {
+      const p = promptPackages.find(x => x.id === id)
+      alert(`Downloading free pack: "${p.title}"\n\nIn production this would trigger a file download.`)
+    }
+
+    // Insights Rendering
+    function renderInsights(filtered = insightsData) {
+      const grid = document.getElementById('insights-grid')
+      grid.innerHTML = ''
+
+      filtered.forEach(item => {
+        const el = document.createElement('div')
+        el.className = `news-card bg-zinc-950 border border-white/10 p-6 rounded-3xl`
+        el.innerHTML = `
+          <div class="flex justify-between text-xs mb-3">
+            <span class="text-purple-400">${item.source}</span>
+            <span class="text-gray-500">${item.date}</span>
+          </div>
+          <div class="font-semibold leading-tight">${item.title}</div>
+          <p class="text-sm text-gray-400 mt-3">${item.summary}</p>
+          <div class="mt-4 text-xs text-purple-400 flex items-center gap-1">Read full →</div>
+        `
+        grid.appendChild(el)
+      })
+    }
+
+    function filterInsights(type) {
+      document.querySelectorAll('.insight-tab').forEach(t => t.classList.remove('active', 'border-purple-500', 'text-white'))
+      const active = document.querySelector(`.insight-tab[data-tab="${type}"]`)
+      if (active) active.classList.add('active', 'border-purple-500', 'text-white')
+
+      let filtered = insightsData
+      if (type !== 'all') filtered = insightsData.filter(i => i.type === type)
+      renderInsights(filtered)
+    }
+
+    // Community Section
+    function renderCommunity() {
+      const grid = document.getElementById('community-grid')
+      grid.innerHTML = ''
+
+      discussions.forEach(d => {
+        const card = document.createElement('div')
+        card.className = `discussion-card bg-zinc-900 border border-white/10 p-6 rounded-3xl`
+        card.innerHTML = `
+          <div class="flex justify-between text-xs">
+            <span class="px-3 py-1 bg-white/5 rounded-2xl text-purple-300">${d.category}</span>
+            <span class="text-gray-500">${d.time}</span>
+          </div>
+          <div class="font-semibold mt-3">${d.title}</div>
+          <div class="text-sm text-gray-400 mt-1">by @${d.author}</div>
+          
+          <div class="flex gap-5 mt-5 text-sm text-gray-400">
+            <div><i class="fas fa-comment mr-1.5"></i> ${d.replies} replies</div>
+            <div><i class="fas fa-heart mr-1.5"></i> ${d.likes}</div>
+          </div>
+        `
+        grid.appendChild(card)
+      })
+    }
+
+    function showNewDiscussionModal() {
+      document.getElementById('new-discussion-modal').classList.remove('hidden')
+      document.getElementById('new-discussion-modal').classList.add('flex')
+    }
+
+    function hideNewDiscussionModal() {
+      document.getElementById('new-discussion-modal').classList.remove('flex')
+      document.getElementById('new-discussion-modal').classList.add('hidden')
+    }
+
+    function postNewDiscussion() {
+      const title = document.getElementById('discussion-title').value.trim()
+      const category = document.getElementById('discussion-category').value
+      const body = document.getElementById('discussion-body').value.trim()
+
+      if (!title) return alert("Please add a title")
+
+      discussions.unshift({
+        id: Date.now(),
+        title: title,
+        category: category,
+        author: "you",
+        replies: 0,
+        likes: 1,
+        time: "just now"
+      })
+
+      hideNewDiscussionModal()
+      renderCommunity()
+      
+      // Clear form
+      document.getElementById('discussion-title').value = ''
+      document.getElementById('discussion-body').value = ''
+      
+      setTimeout(() => {
+        alert("Discussion posted! In a real app this would appear live for the community.")
+      }, 600)
+    }
+
+    // Pricing & Checkout
+    function showPricingModal() {
+      document.getElementById('pricing-modal').classList.remove('hidden')
+      document.getElementById('pricing-modal').classList.add('flex')
+    }
+
+    function hidePricingModal() {
+      document.getElementById('pricing-modal').classList.remove('flex')
+      document.getElementById('pricing-modal').classList.add('hidden')
+    }
+
+    function startProCheckout() {
+      hidePricingModal()
+      alert("Thank you! This would redirect to Stripe checkout for Pro membership ($19/mo).\n\n14-day free trial started in demo mode.")
+    }
+
+    function showLoginModal() {
+      alert("Login modal would open here (demo mode).")
+    }
+
+    // Initialize everything
+    function initializeHub() {
+      // Prompts
+      renderPrompts()
+      initSearch()
+
+      // Category buttons
+      const allBtn = document.querySelector('#category-filters button[data-category="all"]')
+      if (allBtn) allBtn.classList.add('active', 'bg-purple-600')
+
+      // Insights
+      renderInsights()
+
+      // Community
+      renderCommunity()
+
+      console.log('%c[LLM Classroom] Professional hub initialized with individual purchases + Pro + Insights + Community', 'color:#64748b')
+    }
+
+    window.onload = initializeHub
+  </script>
+</body>
+</html>
